@@ -36,7 +36,7 @@
               inherit inputs hostname flake-packages;
             };
             users.russell = ../. + "/homes/russell";
-            backupFileExtension = ".bak";
+            # backupFileExtension = ".bak";
           };
         }
         ../hosts/_modules/common
