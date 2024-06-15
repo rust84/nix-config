@@ -1,5 +1,5 @@
 {
-  description = "bjw-s Nix Flake";
+  description = "My Nix Flake";
 
   inputs = {
     # Nixpkgs and unstable
