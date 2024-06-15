@@ -72,8 +72,8 @@
     );
 
     nixosConfigurations = {
+      andariel = mkSystemLib.mkNixosSystem "x86_64-linux" "andariel" flake-packages;
       duriel = mkSystemLib.mkNixosSystem "x86_64-linux" "duriel" flake-packages;
-      milton = mkSystemLib.mkNixosSystem "x86_64-linux" "milton" flake-packages;
     };
 
     # Convenience output that aggregates the outputs for home, nixos.

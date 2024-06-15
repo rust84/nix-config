@@ -28,12 +28,12 @@
       ssh = {
         enable = true;
         matchBlocks = {
-          "duriel.russhome.xyz" = {
+          "andariel.russhome.xyz" = {
             port = 22;
             user = "russell";
             forwardAgent = true;
           };
-          "milton.russhome.xyz" = {
+          "duriel.russhome.xyz" = {
             port = 22;
             user = "russell";
             forwardAgent = true;

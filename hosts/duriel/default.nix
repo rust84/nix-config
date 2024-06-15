@@ -17,7 +17,7 @@ in
   config = {
     networking = {
       hostName = hostname;
-      hostId = "007f0200";
+      hostId = "9fe3ff83";
       useDHCP = true;
       firewall.enable = false;
     };
@@ -38,7 +38,6 @@ in
         ]
         ++ ifGroupsExist [
           "network"
-          "samba-users"
         ];
     };
     users.groups.russell = {
@@ -51,69 +50,35 @@ in
     '';
 
     modules = {
-      filesystems.zfs = {
-        enable = true;
-        mountPoolsAtBoot = [
-          #"tank"
-        ];
-      };
-
       services = {
-        nfs.enable = true;
+        blocky = {
+          enable = true;
+          package = pkgs.unstable.blocky;
+          config = import ./config/blocky.nix;
+        };
+
+        chrony = {
+          enable = true;
+          servers = [
+            "0.nl.pool.ntp.org"
+            "1.nl.pool.ntp.org"
+            "2.nl.pool.ntp.org"
+            "3.nl.pool.ntp.org"
+          ];
+        };
 
         node-exporter.enable = true;
 
-        openssh.enable = true;
-
-        samba = {
-          enable = false;
-          shares = {
-            Backup = {
-              path = "/tank/Backup";
-              "read only" = "no";
-            };
-            Docs = {
-              path = "/tank/Docs";
-              "read only" = "no";
-            };
-            Media = {
-              path = "/tank/Media";
-              "read only" = "no";
-            };
-            Paperless = {
-              path = "/tank/Apps/paperless/incoming";
-              "read only" = "no";
-            };
-            Software = {
-              path = "/tank/Software";
-              "read only" = "no";
-            };
-            TimeMachineBackup = {
-              path = "/tank/Backup/TimeMachine";
-              "read only" = "no";
-              "fruit:aapl" = "yes";
-              "fruit:time machine" = "yes";
-            };
-          };
+        onepassword-connect = {
+          enable = true;
+          credentialsFile = config.sops.secrets.onepassword-credentials.path;
         };
 
-        smartd.enable = true;
-        smartctl-exporter.enable = true;
+        openssh.enable = true;
       };
 
       users = {
-        additionalUsers = {
-          manyie = {
-            isNormalUser = true;
-            extraGroups = ifGroupsExist [
-              "samba-users"
-            ];
-          };
-        };
         groups = {
-          external-services = {
-            gid = 65542;
-          };
           admins = {
             gid = 991;
             members = [

@@ -8,13 +8,11 @@
     sops = {
       defaultSopsFile = ./secrets.sops.yaml;
       secrets = {
-        # "storage/minio/root-credentials" = {
-        #   owner = config.users.users.minio.name;
-        #   restartUnits = [ "minio.service" ];
-        # };
-        # "networking/cloudflare/auth" = {
-        #   owner = config.users.users.acme.name;
-        # };
+        onepassword-credentials = {
+          mode = "0444";
+        };
+        "networking/cloudflare/ddns/apiToken" = {};
+        "networking/cloudflare/ddns/records" = {};
         "users/russell/password" = {
           neededForUsers = true;
         };
