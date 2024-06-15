@@ -1,5 +1,6 @@
 ---
 keys:
+  - &hosts_andariel age1cfdxmjtzs770d9zvlhsyql3mclr8904dpzksnev58pjlgrz8c3ysl8tp52
   - &host_duriel age10h5pt5ncjnua7j6rslau4ukgvdadh6uytf39x4q9cm8az9fupcqqmnn5cn
   - &user_russell age1knsdzqjgfty7fghdvk8ayr4kmj9kre8nqcg5tvjpjfy6m7a5ap8srhjd6k
 
@@ -8,4 +9,5 @@ creation_rules:
     key_groups:
       - age:
           - *user_russell
+          - *hosts_andariel
           - *host_duriel

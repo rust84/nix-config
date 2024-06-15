@@ -3,7 +3,7 @@
 {
   disko.devices = {
     disk.disk1 = {
-      device = lib.mkDefault "/dev/DISK"; # TODO: replace me
+      device = lib.mkDefault "/dev/nvme0n1"; # TODO: replace me
       type = "disk";
       content = {
         type = "gpt";
