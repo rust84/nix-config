@@ -88,14 +88,6 @@ in
       };
 
       users = {
-        additionalUsers = {
-          manyie = {
-            isNormalUser = true;
-            extraGroups = ifGroupsExist [
-              "samba-users"
-            ];
-          };
-        };
         groups = {
           external-services = {
             gid = 65542;

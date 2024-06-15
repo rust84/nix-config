@@ -1,6 +1,6 @@
 let
   ads-whitelist = builtins.toFile "ads-whitelist" ''
-    rabobank.nl
+    *.amazonaws.com
   '';
 in
 {
@@ -25,14 +25,14 @@ in
   conditional = {
     fallbackUpstream = false;
     mapping = {
-      "1.10.in-addr.arpa" = "10.1.0.1:53";
-      "russhome.xyz" = "10.1.0.1:53";
-      "internal" = "10.1.0.1:53";
+      "20.10.in-addr.arpa" = "10.20.0.1:53";
+      "russhome.xyz" = "10.20.0.1:53";
+      "internal" = "10.20.0.1:53";
     };
   };
 
   # configuration of client name resolution
-  clientLookup.upstream = "10.1.0.1:53";
+  clientLookup.upstream = "10.20.0.1:53";
 
   ecs.useAsClient = true;
 
@@ -45,13 +45,7 @@ in
     loading.downloads.timeout = "4m";
     denylists = {
       ads = [
-        "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"
-      ];
-      fakenews = [
-        "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-only/hosts"
-      ];
-      gambling = [
-        "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/gambling-only/hosts"
+        "https://big.oisd.nl/domainswild"
       ];
     };
 
@@ -62,15 +56,7 @@ in
     };
 
     clientGroupsBlock = {
-      default = [
-        "ads"
-        "fakenews"
-        "gambling"
-      ];
-      "manyie*" = [
-        "fakenews"
-        "gambling"
-      ];
+      default = ["ads"];
     };
   };
 }
