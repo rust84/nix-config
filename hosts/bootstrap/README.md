@@ -28,3 +28,6 @@
         nix run github:nix-community/nixos-anywhere -- --flake .#bootstrap-machine root@<ip address>
 
 9. Once the system has rebooted then you are ready to apply one of the machine configs.
+
+!!! Note
+    Once booted remember to run `nixos-generate-config` and copy the `hardware-configuration.nix` which now contains the root filesystems.
