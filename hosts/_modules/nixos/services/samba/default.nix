@@ -27,30 +27,17 @@ in
       openFirewall = true;
 
       extraConfig = ''
-        min protocol = SMB2
         workgroup = WORKGROUP
-
-        ea support = yes
-        vfs objects = acl_xattr catia fruit streams_xattr
-        fruit:metadata = stream
-        fruit:model = MacSamba
-        fruit:veto_appledouble = no
-        fruit:posix_rename = yes
-        fruit:zero_file_id = yes
-        fruit:wipe_intentionally_left_blank_rfork = yes
-        fruit:delete_empty_adfiles = yes
-        fruit:nfs_aces = no
-
-        browseable = yes
-        guest ok = no
+        server string = andariel
+        netbios name = andariel
+        security = user
+        #use sendfile = yes
+        #max protocol = smb2
+        # note: localhost is the ipv6 localhost ::1
+        hosts allow = 10.20.1 127.0.0.1 localhost
+        hosts deny = 0.0.0.0/0
         guest account = nobody
         map to guest = bad user
-        inherit acls = yes
-        map acl inherit = yes
-        valid users = @samba-users
-
-        veto files = /._*/.DS_Store/
-        delete veto files = yes
       '';
     };
   };

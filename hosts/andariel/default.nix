@@ -54,7 +54,7 @@ in
       filesystems.zfs = {
         enable = true;
         mountPoolsAtBoot = [
-          #"tank"
+          "tank"
         ];
       };
 
@@ -66,14 +66,10 @@ in
         openssh.enable = true;
 
         samba = {
-          enable = false;
+          enable = true;
           shares = {
-            Backup = {
-              path = "/tank/Backup";
-              "read only" = "no";
-            };
             Docs = {
-              path = "/tank/Docs";
+              path = "/tank/Documents";
               "read only" = "no";
             };
             Media = {
@@ -83,16 +79,6 @@ in
             Paperless = {
               path = "/tank/Apps/paperless/incoming";
               "read only" = "no";
-            };
-            Software = {
-              path = "/tank/Software";
-              "read only" = "no";
-            };
-            TimeMachineBackup = {
-              path = "/tank/Backup/TimeMachine";
-              "read only" = "no";
-              "fruit:aapl" = "yes";
-              "fruit:time machine" = "yes";
             };
           };
         };
