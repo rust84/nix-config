@@ -17,7 +17,7 @@ in
   config = {
     networking = {
       hostName = hostname;
-      hostId = "9fe3ff83";
+      hostId = "007f0200";
       useDHCP = true;
       firewall.enable = false;
     };
@@ -38,6 +38,7 @@ in
         ]
         ++ ifGroupsExist [
           "network"
+          "samba-users"
         ];
     };
     users.groups.russell = {
@@ -50,35 +51,47 @@ in
     '';
 
     modules = {
-      services = {
-        blocky = {
-          enable = true;
-          package = pkgs.unstable.blocky;
-          config = import ./config/blocky.nix;
-        };
+      filesystems.zfs = {
+        enable = true;
+        mountPoolsAtBoot = [
+          #"borg"
+        ];
+      };
 
-        chrony = {
-          enable = true;
-          servers = [
-            "0.nl.pool.ntp.org"
-            "1.nl.pool.ntp.org"
-            "2.nl.pool.ntp.org"
-            "3.nl.pool.ntp.org"
-          ];
-        };
+      services = {
+        nfs.enable = true;
 
         node-exporter.enable = true;
 
-        onepassword-connect = {
+        openssh.enable = true;
+
+        samba = {
           enable = true;
-          credentialsFile = config.sops.secrets.onepassword-credentials.path;
+          shares = {
+            Docs = {
+              path = "/borg/documents";
+              "read only" = "no";
+            };
+            Media = {
+              path = "/borg/share";
+              "read only" = "no";
+            };
+            Paperless = {
+              path = "/borg/documents/paperless";
+              "read only" = "no";
+            };
+          };
         };
 
-        openssh.enable = true;
+        smartd.enable = true;
+        smartctl-exporter.enable = true;
       };
 
       users = {
         groups = {
+          external-services = {
+            gid = 65542;
+          };
           admins = {
             gid = 991;
             members = [

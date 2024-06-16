@@ -17,7 +17,7 @@ in
   config = {
     networking = {
       hostName = hostname;
-      hostId = "007f0200";
+      hostId = "9fe3ff83"; # TODO: Update this
       useDHCP = true;
       firewall.enable = false;
     };
@@ -38,7 +38,6 @@ in
         ]
         ++ ifGroupsExist [
           "network"
-          "samba-users"
         ];
     };
     users.groups.russell = {
@@ -51,47 +50,35 @@ in
     '';
 
     modules = {
-      filesystems.zfs = {
-        enable = true;
-        mountPoolsAtBoot = [
-          "tank"
-        ];
-      };
-
       services = {
-        nfs.enable = true;
+        blocky = {
+          enable = true;
+          package = pkgs.unstable.blocky;
+          config = import ./config/blocky.nix;
+        };
+
+        chrony = {
+          enable = true;
+          servers = [
+            "0.nl.pool.ntp.org"
+            "1.nl.pool.ntp.org"
+            "2.nl.pool.ntp.org"
+            "3.nl.pool.ntp.org"
+          ];
+        };
 
         node-exporter.enable = true;
 
-        openssh.enable = true;
-
-        samba = {
+        onepassword-connect = {
           enable = true;
-          shares = {
-            Docs = {
-              path = "/tank/Documents";
-              "read only" = "no";
-            };
-            Media = {
-              path = "/tank/Media";
-              "read only" = "no";
-            };
-            Paperless = {
-              path = "/tank/Apps/paperless/incoming";
-              "read only" = "no";
-            };
-          };
+          credentialsFile = config.sops.secrets.onepassword-credentials.path;
         };
 
-        smartd.enable = true;
-        smartctl-exporter.enable = true;
+        openssh.enable = true;
       };
 
       users = {
         groups = {
-          external-services = {
-            gid = 65542;
-          };
           admins = {
             gid = 991;
             members = [
