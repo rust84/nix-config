@@ -14,7 +14,7 @@ tasks:
       vars:
         - host
     cmds:
-      - nix-shell -p nixos-rebuild --run 'nixos-rebuild build --flake .#{{.host}} --fast --use-remote-sudo --build-host "{{.ssh_user}}@{{.host}}.russhome.xyz" --target-host "{{.ssh_user}}@{{.host}}.russhome.xyz"'
+      - nix-shell -p nixos-rebuild --run 'nixos-rebuild build --flake .#{{.host}} --fast --use-remote-sudo --build-host "{{.ssh_user}}@{{.host}}.internal" --target-host "{{.ssh_user}}@{{.host}}.internal"'
     preconditions:
       - sh: which nix
         msg: "nix not found"
@@ -33,7 +33,7 @@ tasks:
       vars:
         - host
     cmds:
-      - nix-shell -p nixos-rebuild --run 'nixos-rebuild switch --flake .#{{.host}} --fast --use-remote-sudo --build-host "{{.ssh_user}}@{{.host}}.russhome.xyz" --target-host "{{.ssh_user}}@{{.host}}.russhome.xyz"'
+      - nix-shell -p nixos-rebuild --run 'nixos-rebuild switch --flake .#{{.host}} --fast --use-remote-sudo --build-host "{{.ssh_user}}@{{.host}}.internal" --target-host "{{.ssh_user}}@{{.host}}.internal"'
     preconditions:
       - sh: which nix
         msg: "nix not found"
