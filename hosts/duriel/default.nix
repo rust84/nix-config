@@ -69,15 +69,15 @@ in
           enable = true;
           shares = {
             Docs = {
-              path = "/borg/documents";
+              path = "/tank/Documents";
               "read only" = "no";
             };
             Media = {
-              path = "/borg/share";
+              path = "/tank/Media";
               "read only" = "no";
             };
             Paperless = {
-              path = "/borg/documents/paperless";
+              path = "/tank/Apps/paperless";
               "read only" = "no";
             };
           };
