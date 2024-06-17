@@ -54,7 +54,7 @@ in
       filesystems.zfs = {
         enable = true;
         mountPoolsAtBoot = [
-          #"borg"
+          "tank"
         ];
       };
 
