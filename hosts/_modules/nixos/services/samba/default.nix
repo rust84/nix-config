@@ -28,8 +28,8 @@ in
 
       extraConfig = ''
         workgroup = WORKGROUP
-        server string = andariel
-        netbios name = andariel
+        server string = duriel
+        netbios name = duriel
         security = user
         #use sendfile = yes
         #max protocol = smb2
