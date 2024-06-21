@@ -28,6 +28,8 @@ in
 
     services.zfs = {
       autoScrub.enable = true;
+      # Defaults to weekly
+      autoScrub.interval = "monthly";
       trim.enable = true;
     };
   };
