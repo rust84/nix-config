@@ -9,6 +9,7 @@ in {
     environment.systemPackages = [
       pkgs.sops
       pkgs.age
+      (pkgs.python3.withPackages (ps: [ ps.pip ]))
     ];
 
     sops = {
