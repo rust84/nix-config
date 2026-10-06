@@ -15,6 +15,10 @@
     ./hosts/${hostname}.nix
   ];
 
+  home.packages = [
+    inputs.caesura.packages.${pkgs.system}.caesura
+  ];
+
   modules = {
     editor = {
       nvim = {

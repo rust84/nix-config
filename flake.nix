@@ -30,6 +30,7 @@
     };
 
     nix-inspect.url = "github:bluskript/nix-inspect";
+    caesura.url = "github:RogueOneEcho/nix";
   };
 
   outputs = {
